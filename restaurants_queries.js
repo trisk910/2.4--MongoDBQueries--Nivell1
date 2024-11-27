@@ -66,3 +66,27 @@ db.restaurants.find(
 ).sort({ cuisine: -1 });
 
 // 14. Escriu una consulta per trobar el restaurant_id, name, borough i cuisine per a aquells restaurants que contenen 'Wil' com les tres primeres lletres en el seu nom.
+db.restaurants.find(
+  { name: { $regex: "^Wil", $options: "i" } },
+  { restaurant_id: 1, name: 1, borough: 1, cuisine: 1, _id: 0 }
+);
+
+// 15. Escriu una consulta per trobar el restaurant_id, name, borough i cuisine per a aquells restaurants que contenen 'ces' com les últimes tres lletres en el seu nom.
+db.restaurants.find(
+  { name: { $regex: "ces$", $options: "i" } },
+  { restaurant_id: 1, name: 1, borough: 1, cuisine: 1, _id: 0 }
+);
+
+// 16. Escriu una consulta per trobar el restaurant_id, name, borough i cuisine per a aquells restaurants que contenen 'Reg' com tres lletres en algun lloc en el seu nom.
+db.restaurants.find(
+  { name: { $regex: "Reg", $options: "i" } },
+  { restaurant_id: 1, name: 1, borough: 1, cuisine: 1, _id: 0 }
+);
+
+// 17. Escriu una consulta per trobar els restaurants que pertanyen al Bronx i van preparar qualsevol plat americà o xinès.
+db.restaurants.find(
+	{borough: "Bronx",  $or: [
+      { cuisine: "American" },
+      { cuisine: "Chinese" }
+    ]}
+);
